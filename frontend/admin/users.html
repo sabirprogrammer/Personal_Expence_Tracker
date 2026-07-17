@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2 style="background: linear-gradient(to right, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AdminPortal</h2>
+      </div>
+      
+      <div class="sidebar-user" style="border-color: rgba(245, 158, 11, 0.2);">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole" style="color: var(--color-admin);">Admin</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="users.html" class="active">User Management</a>
+        <a href="categories.html">Category Management</a>
+        <a href="reports.html">Transaction Monitor</a>
+        <a href="settings.html">System Settings</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>User Account Management</h1>
+      </header>
+      
+      <main class="content-area">
+        <!-- Search & Filters Control Bar -->
+        <div class="controls-bar">
+          <div class="search-wrapper">
+            <input type="text" id="userSearchInput" placeholder="Search users by name or email...">
+          </div>
+
+          <div class="filter-wrapper">
+            <label for="userFilterStatus">Status</label>
+            <select id="userFilterStatus">
+              <option value="">All Statuses</option>
+              <option value="active">Active Only</option>
+              <option value="disabled">Disabled Only</option>
+            </select>
+
+            <label for="userFilterRole" style="margin-left: 12px;">Role</label>
+            <select id="userFilterRole">
+              <option value="">All Roles</option>
+              <option value="user">User Role</option>
+              <option value="admin">Admin Role</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Users Table Panel -->
+        <div class="panel" style="padding: 16px;">
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Registration Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTableBody">
+                <!-- User rows rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- User Editing Modal Backdrop -->
+  <div class="modal-backdrop" id="editUserModalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit User Profile</h3>
+        <button class="modal-close" id="editUserCloseBtn">&times;</button>
+      </div>
+
+      <form id="editUserForm">
+        <input type="hidden" id="editUserId">
+
+        <div class="form-group">
+          <label for="editUserName">Full Name</label>
+          <input type="text" id="editUserName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editUserEmail">Email Address</label>
+          <input type="email" id="editUserEmail" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editUserRoleSelect">System Role</label>
+            <select id="editUserRoleSelect" required>
+              <option value="user">User</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editUserStatusSelect">Account Status</label>
+            <select id="editUserStatusSelect" required>
+              <option value="active">Active</option>
+              <option value="disabled">Disabled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 8px;">
+          <label for="editUserPassword">Reset Password (Optional)</label>
+          <input type="password" id="editUserPassword" placeholder="Leave empty to keep current password">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelEditUserBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Updates</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

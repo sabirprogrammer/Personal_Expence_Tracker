@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Management - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2 style="background: linear-gradient(to right, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AdminPortal</h2>
+      </div>
+      
+      <div class="sidebar-user" style="border-color: rgba(245, 158, 11, 0.2);">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole" style="color: var(--color-admin);">Admin</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="users.html">User Management</a>
+        <a href="categories.html" class="active">Category Management</a>
+        <a href="reports.html">Transaction Monitor</a>
+        <a href="settings.html">System Settings</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>Category Settings</h1>
+      </header>
+      
+      <main class="content-area" style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px;">
+        <!-- Left: Category Creation Panel -->
+        <section class="panel" style="height: fit-content;">
+          <div class="panel-header">
+            <h2>Add Category</h2>
+          </div>
+          <form id="addCategoryForm">
+            <div class="form-group">
+              <label for="newCategoryName">Category Name</label>
+              <input type="text" id="newCategoryName" placeholder="e.g. Health & Care" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 8px;">Create Category</button>
+          </form>
+        </section>
+
+        <!-- Right: Category List Table Panel -->
+        <section class="panel" style="padding: 16px;">
+          <div class="panel-header">
+            <h2>Expense & Income Categories</h2>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category ID</th>
+                  <th>Category Name</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminCategoriesTableBody">
+                <!-- Loaded dynamically via fetch requests -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Category Edit Modal -->
+  <div class="modal-backdrop" id="editCatModalBackdrop">
+    <div class="modal" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Category</h3>
+        <button class="modal-close" id="editCatCloseBtn">&times;</button>
+      </div>
+
+      <form id="editCatForm">
+        <input type="hidden" id="editCatId">
+
+        <div class="form-group">
+          <label for="editCatName">Category Name</label>
+          <input type="text" id="editCatName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editCatStatusSelect">Status</label>
+          <select id="editCatStatusSelect" required>
+            <option value="active">Active (Visible to users)</option>
+            <option value="disabled">Disabled (Hidden from users)</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelEditCatBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

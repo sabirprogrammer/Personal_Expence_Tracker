@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Personal Expense Tracker</title>
+    <meta name="description" content="Register a new personal profile account with ExpenseTracker to start tracking your finances.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="auth-container">
+    <div class="auth-card" style="max-width: 600px; padding: 32px;">
+        <div class="auth-header">
+            <h2>Create an Account</h2>
+            <p>Fill out the form below to register</p>
+        </div>
+        
+        <form id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="At least 6 characters" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div style="display: flex; gap: 16px; margin-top: 10px;">
+                        <label class="checkbox-group" style="margin: 0;">
+                            <input type="radio" id="male" name="gender" value="male" checked> Male
+                        </label>
+                        <label class="checkbox-group" style="margin: 0;">
+                            <input type="radio" id="female" name="gender" value="female"> Female
+                        </label>
+                        <label class="checkbox-group" style="margin: 0;">
+                            <input type="radio" id="other" name="gender" value="other"> Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="">-- Select your country --</option>
+                    <option value="pk">Pakistan</option>
+                    <option value="af">Afghanistan</option>
+                    <option value="ir">Iran</option>
+                    <option value="in">India</option>
+                    <option value="ch">China</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <label class="checkbox-group" style="margin-top: 8px;">
+                <input type="checkbox" id="terms" name="terms" value="accepted" required>
+                I accept the Terms and Conditions
+            </label>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 12px;">Sign Up</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+    <script src="../js/api.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

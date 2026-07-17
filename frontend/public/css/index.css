@@ -1,0 +1,294 @@
+/* ============================================================
+   ExpenseTracker - Landing Page Core Styles (index.css)
+   Body, hero, features, stats, testimonials, CTA sections
+   ============================================================ */
+
+/* Global Landing Page Base */
+html {
+    scroll-behavior: smooth;
+}
+
+body.landing-page {
+    background-color: #080c14;
+    color: #f3f4f6;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ---- Section Layout ---- */
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, #ffffff, #9ca3af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-header p {
+    color: #9ca3af;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* ---- Hero Section ---- */
+.hero-section {
+    padding-top: 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom right, #ffffff 30%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    color: #9ca3af;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+/* Hero Dashboard Mockup */
+.hero-mockup {
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent 60%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mockup-container {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg, 16px);
+    background: rgba(21, 31, 50, 0.4);
+    backdrop-filter: blur(12px);
+    padding: 24px;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* ---- Features Section ---- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.feature-card {
+    background: rgba(21, 31, 50, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg, 16px);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    border-color: rgba(136, 84, 208, 0.3);
+    background: rgba(21, 31, 50, 0.55);
+    box-shadow: 0 12px 30px -10px rgba(136, 84, 208, 0.15);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md, 8px);
+    background-color: var(--color-primary-light, rgba(136, 84, 208, 0.15));
+    color: var(--color-primary, #8854d0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #9ca3af;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ---- Why Choose Us Section ---- */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.benefit-item {
+    display: flex;
+    gap: 16px;
+    background: rgba(21, 31, 50, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: var(--radius-md, 8px);
+}
+
+.benefit-icon {
+    color: var(--color-income, #10b981);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.benefit-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.benefit-content p {
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* ---- Stats Section ---- */
+.stats-section {
+    background: linear-gradient(
+        180deg,
+        rgba(8, 12, 20, 0) 0%,
+        rgba(21, 31, 50, 0.3) 50%,
+        rgba(8, 12, 20, 0) 100%
+    );
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 44px;
+    font-weight: 800;
+    background: linear-gradient(to right, #ffffff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ---- Testimonials Section ---- */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+.testimonial-card {
+    background: rgba(21, 31, 50, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-lg, 16px);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.testimonial-rating {
+    color: #f59e0b;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.testimonial-content {
+    color: #d1d5db;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+.testimonial-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.testimonial-meta h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.testimonial-meta span {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* ---- CTA Banner Section ---- */
+.cta-banner {
+    background: linear-gradient(
+        135deg,
+        rgba(136, 84, 208, 0.2) 0%,
+        rgba(99, 102, 241, 0.15) 100%
+    );
+    border: 1px solid rgba(136, 84, 208, 0.2);
+    border-radius: var(--radius-lg, 16px);
+    padding: 60px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin: 40px auto 100px auto;
+    max-width: 1000px;
+}
+
+.cta-banner h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.cta-banner p {
+    color: #d1d5db;
+    font-size: 17px;
+    max-width: 550px;
+    margin: 0 auto 32px auto;
+    line-height: 1.5;
+}

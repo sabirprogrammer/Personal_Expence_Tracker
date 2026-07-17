@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ExpenseTracker — Smart financial management with role-based dashboards, transaction tracking, category management, and secure JWT authentication.">
+    <title>ExpenseTracker - Smart Financial Management</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Core App Stylesheet (dark theme design tokens & utility classes) -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Landing Page Modular Stylesheets -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="landing-page">
+
+    <!-- ====================================================
+         HEADER NAVIGATION
+         ==================================================== -->
+    <header class="landing-header" id="landingHeader">
+        <div class="nav-container">
+            <a href="index.html" class="logo-text" aria-label="ExpenseTracker Home">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="9" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="14" y="3" width="7" height="5" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="3" y="16" width="7" height="5" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="14" y="12" width="7" height="9" rx="1.5" fill="url(#logoGrad)" />
+                    <defs>
+                        <linearGradient id="logoGrad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#a855f7" />
+                            <stop offset="1" stop-color="#6366f1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                ExpenseTracker
+            </a>
+
+            <nav aria-label="Main Navigation">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#about" class="nav-link">Why Us</a></li>
+                    <li><a href="#reports" class="nav-link">Reports</a></li>
+                    <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-buttons">
+                <a href="../user/login.html" class="btn-nav-login" id="navLoginBtn">Login</a>
+                <a href="../user/signup.html" class="btn-nav-register" id="navRegisterBtn">Create Account</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Mobile Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#about" class="nav-link">Why Us</a>
+        <a href="#reports" class="nav-link">Reports</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
+        <hr style="border:0; border-top: 1px solid rgba(255,255,255,0.05); margin: 8px 0;">
+        <a href="../user/login.html" class="btn btn-secondary btn-sm" style="width:100%;">Login</a>
+        <a href="../user/signup.html" class="btn btn-primary btn-sm" style="width:100%;">Create Account</a>
+    </div>
+
+    <!-- ====================================================
+         SECTION 1: HERO
+         ==================================================== -->
+    <section class="landing-section hero-section reveal" id="home" style="opacity: 1; transform: translateY(0);">
+        <div class="hero-text">
+            <h1>Master Your Finances with Smart Analytics</h1>
+            <p>Take control of your financial health. Add transactions, monitor expenses, track custom categories, and secure your personal account in one professional application.</p>
+            <div class="hero-actions">
+                <a href="../user/signup.html" class="btn btn-primary btn-lg" id="heroGetStartedBtn">Get Started Free</a>
+                <a href="../user/login.html" class="btn btn-secondary btn-lg" id="heroLoginBtn">Login to Account</a>
+            </div>
+        </div>
+
+        <div class="hero-mockup" aria-hidden="true">
+            <!-- Glassmorphic Dashboard Mockup -->
+            <div class="mockup-container">
+                <!-- Title Bar Simulation -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+                    <div style="display:flex; gap:6px;">
+                        <span style="width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+                        <span style="width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+                        <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+                    </div>
+                    <span style="font-size:10px; color:#6b7280; font-family:monospace; background:rgba(255,255,255,0.03); padding:2px 8px; border-radius:4px;">PRO-DASHBOARD</span>
+                </div>
+
+                <!-- Mini Balance Cards -->
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom: 16px;">
+                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px;" class="floating-card">
+                        <span style="font-size:9px; color:#9ca3af; text-transform:uppercase;">Income</span>
+                        <div style="font-size:16px; font-weight:700; color:#10b981; margin-top:2px;">Rs: 8,200.00</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px;" class="floating-card-delay">
+                        <span style="font-size:9px; color:#9ca3af; text-transform:uppercase;">Expenses</span>
+                        <div style="font-size:16px; font-weight:700; color:#f43f5e; margin-top:2px;">Rs: 3,950.00</div>
+                    </div>
+                </div>
+
+                <!-- Chart Simulation -->
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); border-radius:8px; padding:16px; margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <span style="font-size:11px; font-weight:600;">Monthly Summary</span>
+                        <span style="font-size:9px; color:#10b981; font-weight:600;">+ 42% Profit</span>
+                    </div>
+                    <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;" aria-label="Monthly chart">
+                        <rect x="10" y="20" width="12" height="40" rx="2" fill="rgba(16, 185, 129, 0.4)" />
+                        <rect x="10" y="35" width="12" height="25" rx="2" fill="#10b981" />
+                        <rect x="35" y="15" width="12" height="45" rx="2" fill="rgba(244, 63, 94, 0.4)" />
+                        <rect x="35" y="25" width="12" height="35" rx="2" fill="#f43f5e" />
+                        <rect x="60" y="5" width="12" height="55" rx="2" fill="rgba(16, 185, 129, 0.4)" />
+                        <rect x="60" y="18" width="12" height="42" rx="2" fill="#10b981" />
+                        <rect x="85" y="25" width="12" height="35" rx="2" fill="rgba(244, 63, 94, 0.4)" />
+                        <rect x="85" y="40" width="12" height="20" rx="2" fill="#f43f5e" />
+                        <rect x="110" y="10" width="12" height="50" rx="2" fill="rgba(16, 185, 129, 0.4)" />
+                        <rect x="110" y="22" width="12" height="38" rx="2" fill="#10b981" />
+                    </svg>
+                </div>
+
+                <!-- Floating RBAC Badge -->
+                <div style="background: rgba(136, 84, 208, 0.9); padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; position: absolute; bottom: -10px; right: -15px;" class="floating-card">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" /></svg>
+                    <span style="font-size: 10px; font-weight:700; color:#fff;">RBAC Protected</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 2: FEATURES
+         ==================================================== -->
+    <section class="landing-section" id="features">
+        <div class="section-header">
+            <h2>Features &amp; Modules</h2>
+            <p>Everything you need to track spending habits, build security rules, and audit transactions with ease.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <h3>Income Tracking</h3>
+                <p>Add wages, freelance earnings, or performance bonuses quickly and assign them directly to your balance history.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="color:var(--color-expense); background-color:var(--color-expense-bg);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><path d="M2 10h20M12 14h.01M16 14h.01M8 14h.01"/></svg>
+                </div>
+                <h3>Expense Control</h3>
+                <p>Track bills, subscriptions, groceries, and dining expenses dynamically. Stay organized on where your funds go.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="color:var(--color-balance); background-color:var(--color-balance-bg);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                </div>
+                <h3>Smart Analytics</h3>
+                <p>Observe spending ratios grouped visually by categories. Uncover key insights about your financial data.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Secure Authentication</h3>
+                <p>Rest assured with JWT verification and password hashing using bcrypt. Your profile remains safe.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="color:var(--color-admin); background-color:var(--color-admin-bg);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
+                <h3>Category Management</h3>
+                <p>Create, rename, or toggle visibility of transaction categories safely. Prevent duplicate category entries.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="color:var(--color-income); background-color:var(--color-income-bg);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+                <h3>Audited Logs</h3>
+                <p>View transaction lists with customizable filters. Search by description or category and sort by price/date.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 3: PROFESSIONAL DASHBOARDS PREVIEW
+         ==================================================== -->
+    <section class="landing-section" id="reports">
+        <div class="section-header">
+            <h2>Professional Dashboards</h2>
+            <p>Access high-quality breakdowns of your personal balances or monitor activities as an administrator.</p>
+        </div>
+
+        <div style="background: rgba(21, 31, 50, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-lg); padding: 40px; text-align: center; max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-lg);">
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">Visual Reporting</h3>
+            <p style="color: #9ca3af; font-size: 14px; max-width: 500px; margin: 0 auto 32px auto;">Get a breakdown of monthly totals. Chart.js integration generates graphical reports showing income compared to expenses.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; text-align: left;">
+                <!-- User Role Preview -->
+                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                        <span style="font-weight: 600; font-size: 13px; color: var(--color-balance);">User Account Profile</span>
+                        <span class="badge badge-user" style="font-size:10px;">User View</span>
+                    </div>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #9ca3af;">
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            View personal finances only
+                        </li>
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            Add/Edit personal transactions
+                        </li>
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            Update profile picture and password
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Admin Role Preview -->
+                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                        <span style="font-weight: 600; font-size: 13px; color: var(--color-admin);">Administrator Console</span>
+                        <span class="badge badge-admin" style="font-size:10px;">Admin View</span>
+                    </div>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #9ca3af;">
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            Enable/Disable user profiles
+                        </li>
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            Delete inappropriate logs
+                        </li>
+                        <li style="display:flex; align-items:center; gap:8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-income)" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                            Manage category lists globally
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 4: WHY CHOOSE US
+         ==================================================== -->
+    <section class="landing-section" id="about">
+        <div class="section-header">
+            <h2>Why Choose ExpenseTracker?</h2>
+            <p>We combine modern UI/UX design with professional backend constraints to keep your finances under control.</p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <div class="benefit-content">
+                    <h3>Secure Isolation</h3>
+                    <p>Protected routes block users from querying another individual's transactions.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <svg class="benefit-icon" style="color:var(--color-balance);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <div class="benefit-content">
+                    <h3>Fast Performance</h3>
+                    <p>Fast MongoDB queries powered by indexed schemas and optimized routing layers.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <div class="benefit-content">
+                    <h3>Overall Architecture</h3>
+                    <p>Shared route rules, clear role separation, and isolated backend layers keep the app easier to maintain.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <svg class="benefit-icon" style="color:var(--color-admin);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                <div class="benefit-content">
+                    <h3>Fully Responsive</h3>
+                    <p>Access your statistics on desktop, tablet, or mobile viewport sizes effortlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 5: STATISTICS
+         ==================================================== -->
+    <section class="landing-section stats-section" id="stats">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number" data-target="15000">0</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div>
+                <div class="stat-number" data-target="2400000">0</div>
+                <div class="stat-label">Transactions Logged</div>
+            </div>
+            <div>
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Custom Categories</div>
+            </div>
+            <div>
+                <div class="stat-number" data-target="99.9" data-decimals="1">0</div>
+                <div class="stat-label">System Uptime</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 6: TESTIMONIALS
+         ==================================================== -->
+    <section class="landing-section" id="testimonials">
+        <div class="section-header">
+            <h2>What Our Users Say</h2>
+            <p>Loved by thousands of users managing budgets and tracing income records daily.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating" aria-label="5 stars">★★★★★</div>
+                <p class="testimonial-content">"ExpenseTracker transformed the way I organize my freelance accounts. The layout is beautiful, and categorizing utility bills is completely painless."</p>
+                <div class="testimonial-user">
+                    <div class="testimonial-avatar" aria-hidden="true">JD</div>
+                    <div class="testimonial-meta">
+                        <h4>John Doe</h4>
+                        <span>Freelancer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-rating" aria-label="5 stars">★★★★★</div>
+                <p class="testimonial-content">"The RBAC dashboard separation is exactly what we needed to monitor activity audits. It is fast, clean, and highly secure."</p>
+                <div class="testimonial-user">
+                    <div class="testimonial-avatar" aria-hidden="true">AS</div>
+                    <div class="testimonial-meta">
+                        <h4>Alice Smith</h4>
+                        <span>Compliance Manager</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-rating" aria-label="5 stars">★★★★★</div>
+                <p class="testimonial-content">"Creating custom categories and loading monthly doughnut charts gives me instant clarity on where my money goes."</p>
+                <div class="testimonial-user">
+                    <div class="testimonial-avatar" aria-hidden="true">RK</div>
+                    <div class="testimonial-meta">
+                        <h4>Raza Khan</h4>
+                        <span>Small Business Owner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 7: CALL TO ACTION
+         ==================================================== -->
+    <section class="landing-section" style="padding-top: 0; padding-bottom: 40px;">
+        <div class="cta-banner">
+            <h2>Ready to Take Control of Your Money?</h2>
+            <p>Join thousands of users tracking expenses, saving cash, and organizing finances every single day.</p>
+            <a href="../user/signup.html" class="btn btn-primary btn-lg" style="box-shadow: 0 8px 24px rgba(136, 84, 208, 0.4);" id="ctaSignupBtn">Create Free Account</a>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         FOOTER
+         ==================================================== -->
+    <footer class="landing-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-text" aria-label="ExpenseTracker Home">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="3" y="3" width="7" height="9" rx="1.5" fill="url(#footerLogoGrad)" />
+                        <rect x="14" y="3" width="7" height="5" rx="1.5" fill="url(#footerLogoGrad)" />
+                        <rect x="3" y="16" width="7" height="5" rx="1.5" fill="url(#footerLogoGrad)" />
+                        <rect x="14" y="12" width="7" height="9" rx="1.5" fill="url(#footerLogoGrad)" />
+                        <defs>
+                            <linearGradient id="footerLogoGrad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#a855f7" />
+                                <stop offset="1" stop-color="#6366f1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    ExpenseTracker
+                </a>
+                <p>Simplifying budget monitoring and financial auditing using smart, secure technology dashboards.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Twitter">T</a>
+                    <a href="#" class="social-link" aria-label="GitHub">G</a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">L</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">Why Us</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Features</h3>
+                <ul class="footer-links">
+                    <li><a href="../user/signup.html">Registration</a></li>
+                    <li><a href="../user/login.html">Login Access</a></li>
+                    <li><a href="../user/dashboard.html">User Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="footer-links" style="color: #9ca3af; font-size:14px;">
+                    <li>support@expensetracker.com</li>
+                    <li>123 Smart Finance St</li>
+                    <li>Karachi, Pakistan</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 ExpenseTracker. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms &amp; Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====================================================
+         SCRIPTS — All external, no inline JS
+         ==================================================== -->
+    <!-- Landing page JS modules -->
+    <script src="js/navbar.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

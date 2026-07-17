@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Expense Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2 style="background: linear-gradient(to right, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AdminPortal</h2>
+      </div>
+      
+      <div class="sidebar-user" style="border-color: rgba(245, 158, 11, 0.2);">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole" style="color: var(--color-admin);">Admin</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="index.html" class="active">Overview</a>
+        <a href="users.html">User Management</a>
+        <a href="categories.html">Category Management</a>
+        <a href="reports.html">Transaction Monitor</a>
+        <a href="settings.html">System Settings</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>Administrative System Overview</h1>
+      </header>
+      
+      <main class="content-area">
+        <!-- Analytics summary metric cards -->
+        <section class="dashboard-cards">
+          <article class="card users">
+            <h3>Total Users</h3>
+            <p id="adminTotalUsers">0</p>
+            <div style="font-size: 11px; margin-top: 4px; color: var(--text-secondary);">
+              <span id="adminActiveUsers" style="color: var(--color-income); font-weight:600;">0</span> Active &bull;
+              <span id="adminDisabledUsers" style="color: var(--color-expense); font-weight:600;">0</span> Disabled
+            </div>
+          </article>
+          
+          <article class="card income">
+            <h3>Total System Income</h3>
+            <p id="adminTotalIncome">Rs: 0.00</p>
+          </article>
+
+          <article class="card expense">
+            <h3>Total System Expenses</h3>
+            <p id="adminTotalExpenses">Rs: 0.00</p>
+          </article>
+
+          <article class="card balance">
+            <h3>System Net Balance</h3>
+            <p id="adminNetBalance">Rs: 0.00</p>
+          </article>
+        </section>
+
+        <!-- Charts panel -->
+        <div class="section-grid" style="margin-bottom: 32px;">
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Category Expenses (System)</h2>
+            </div>
+            <div style="position: relative; height: 260px; display: flex; align-items: center; justify-content: center;">
+              <canvas id="adminCategoryChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Financial Growth Trends</h2>
+            </div>
+            <div style="position: relative; height: 260px; display: flex; align-items: center; justify-content: center;">
+              <canvas id="adminMonthlyChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Registered & Activity grids -->
+        <div class="section-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Recent Registered Users</h2>
+            </div>
+            <div id="adminRecentUsers">
+              <p class="empty-state">No users registered.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Recent Transaction Logs</h2>
+              <span class="badge badge-admin" id="adminTotalTransactions">0 Logs</span>
+            </div>
+            <div id="adminRecentTransactions">
+              <p class="empty-state">No recent activity.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* ============================================================
+   ExpenseTracker - Landing Page Animations & Keyframes
+   ============================================================ */
+
+/* Floating Keyframe Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Floating Card Classes */
+.floating-card {
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-card-delay {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* Scroll Reveal: sections start hidden and animate in on viewport entry */
+.landing-section {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.landing-section.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Feature card hover lift animation */
+.feature-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Button micro-animations */
+.btn-nav-register,
+.btn-primary,
+.btn-secondary {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}

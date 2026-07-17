@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction - Personal Expense Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>ExpenseTracker</h2>
+            </div>
+            
+            <div class="sidebar-user">
+                <div id="sidebarAvatar"></div>
+                <div class="user-info">
+                    <span class="user-name" id="sidebarUserName">Loading...</span>
+                    <span class="user-role" id="sidebarUserRole">User</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="add-transaction.html" class="active">Add Transaction</a>
+                <a href="reports.html">Reports</a>
+                <a href="profile.html">Profile</a>
+                <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+            </nav>
+        </aside>
+        
+        <div class="main-layout">
+            <header class="app-header">
+                <h1 id="formPageTitle">Manage Transaction</h1>
+            </header>
+            
+            <main class="content-area">
+                <div class="panel" style="max-width: 600px; margin: 0 auto;">
+                    <div class="panel-header">
+                        <h2>Record Transaction</h2>
+                    </div>
+
+                    <form id="transactionForm">
+                        <input type="hidden" id="editId" name="editId" value="">
+
+                        <div class="form-group">
+                            <label for="type">Transaction Type</label>
+                            <select id="type" name="type" required>
+                                <option value="">-- Select Transaction Type --</option>
+                                <option value="income">Income</option>
+                                <option value="expense">Expense</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Amount (Rs)</label>
+                            <input type="number" id="amount" name="amount" step="0.01" min="0.01" placeholder="Enter amount" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category" required>
+                                <option value="">-- Select Category --</option>
+                                <!-- Categories loaded dynamically from API -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Transaction Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description / Notes</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Enter transaction details or notes..."></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 12px;">
+                            <button type="submit" class="btn btn-primary" style="flex-grow: 1;">Add Transaction</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

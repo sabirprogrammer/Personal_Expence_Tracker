@@ -1,0 +1,113 @@
+/* ============================================================
+   ExpenseTracker - Footer Styles
+   ============================================================ */
+
+/* Footer Main Container */
+.landing-footer {
+    background-color: #05070a;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 24px 40px 24px;
+}
+
+/* Footer Grid Layout */
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+/* Brand Column */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-brand p {
+    color: #9ca3af;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 280px;
+}
+
+/* Social Links */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.social-link:hover {
+    background: var(--color-primary-light, rgba(136, 84, 208, 0.15));
+    color: #ffffff;
+}
+
+/* Footer Columns */
+.footer-column h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f3f4f6;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+/* Footer Bottom Bar */
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+    color: #d1d5db;
+}

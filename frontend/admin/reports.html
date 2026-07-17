@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Monitor - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2 style="background: linear-gradient(to right, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AdminPortal</h2>
+      </div>
+      
+      <div class="sidebar-user" style="border-color: rgba(245, 158, 11, 0.2);">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole" style="color: var(--color-admin);">Admin</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="users.html">User Management</a>
+        <a href="categories.html">Category Management</a>
+        <a href="reports.html" class="active">Transaction Monitor</a>
+        <a href="settings.html">System Settings</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>Global Transaction Log Monitor</h1>
+      </header>
+      
+      <main class="content-area">
+        <!-- Search & Filters Control Bar -->
+        <div class="controls-bar">
+          <div class="search-wrapper">
+            <input type="text" id="transSearchInput" placeholder="Search by name, email, category or description...">
+          </div>
+
+          <div class="filter-wrapper">
+            <label for="transFilterType">Type</label>
+            <select id="transFilterType">
+              <option value="all">All Types</option>
+              <option value="Income">Income Only</option>
+              <option value="Expense">Expense Only</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- System Transactions Table Panel -->
+        <div class="panel" style="padding: 16px;">
+          <div class="panel-header">
+            <h2>User Transaction History Logs</h2>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ref ID</th>
+                  <th>User Profile</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminTransTableBody">
+                <!-- Dynamically loaded -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

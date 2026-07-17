@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2 style="background: linear-gradient(to right, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AdminPortal</h2>
+      </div>
+      
+      <div class="sidebar-user" style="border-color: rgba(245, 158, 11, 0.2);">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole" style="color: var(--color-admin);">Admin</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="users.html">User Management</a>
+        <a href="categories.html">Category Management</a>
+        <a href="reports.html">Transaction Monitor</a>
+        <a href="settings.html" class="active">System Settings</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>Global Settings & Maintenance</h1>
+      </header>
+      
+      <main class="content-area">
+        <div class="section-grid">
+          <!-- Database Configuration Settings panel -->
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Database Details</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">Connection State</span>
+                <p style="color: var(--color-income); font-weight: 700; margin-top: 2px;">Connected (MongoDB)</p>
+              </div>
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">Connection URI</span>
+                <p class="monospace" style="margin-top: 2px;">Protected (Configuration Loaded)</p>
+              </div>
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">JWT Expiry Settings</span>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">7 Days (Session Persistence)</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Maintenance Actions panel -->
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Maintenance</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">Runtime Environment</span>
+                <p style="color: var(--color-balance); font-weight: 700; margin-top: 2px;">Development (Node/Express/Mongoose)</p>
+              </div>
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">Application Port</span>
+                <p class="monospace" style="margin-top: 2px;">5000</p>
+              </div>
+              <div>
+                <span style="font-weight: 600; font-size: 13px; color: var(--text-secondary);">System Status</span>
+                <span class="badge badge-income" style="margin-top: 4px;">Healthy</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

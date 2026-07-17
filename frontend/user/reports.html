@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Reports - Personal Expense Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Chart.js CDN for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>ExpenseTracker</h2>
+            </div>
+            
+            <div class="sidebar-user">
+                <div id="sidebarAvatar"></div>
+                <div class="user-info">
+                    <span class="user-name" id="sidebarUserName">Loading...</span>
+                    <span class="user-role" id="sidebarUserRole">User</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="add-transaction.html">Add Transaction</a>
+                <a href="reports.html" class="active">Reports</a>
+                <a href="profile.html">Profile</a>
+                <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+            </nav>
+        </aside>
+        
+        <div class="main-layout">
+            <header class="app-header">
+                <h1>Financial Analytics & Reports</h1>
+            </header>
+            
+            <main class="content-area">
+                <div class="section-grid">
+                    <!-- Category Breakdown Card -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Category Breakdown</h2>
+                        </div>
+                        <div id="categoryChartContainer" style="position: relative; height: 320px; display: flex; align-items: center; justify-content: center;">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Trends Card -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Income vs Expenses Trends</h2>
+                        </div>
+                        <div id="monthlyChartContainer" style="position: relative; height: 320px; display: flex; align-items: center; justify-content: center;">
+                            <canvas id="monthlyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

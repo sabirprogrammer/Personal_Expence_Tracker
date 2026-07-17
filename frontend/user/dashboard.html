@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Personal Expense Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h2>ExpenseTracker</h2>
+      </div>
+      
+      <div class="sidebar-user">
+        <div id="sidebarAvatar"></div>
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">Loading...</span>
+          <span class="user-role" id="sidebarUserRole">User</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="add-transaction.html">Add Transaction</a>
+        <a href="reports.html">Reports</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+      </nav>
+    </aside>
+    
+    <div class="main-layout">
+      <header class="app-header">
+        <h1>Dashboard Overview</h1>
+      </header>
+      
+      <main class="content-area">
+        <!-- Account Metrics Grid -->
+        <section class="dashboard-cards">
+          <article class="card income">
+            <h3>Total Income</h3>
+            <p id="totalIncome">Rs: 0.00</p>
+          </article>
+          <article class="card expense">
+            <h3>Total Expenses</h3>
+            <p id="totalExpenses">Rs: 0.00</p>
+          </article>
+          <article class="card balance">
+            <h3>Remaining Balance</h3>
+            <p id="remainingBalance">Rs: 0.00</p>
+          </article>
+        </section>
+
+        <!-- Current Month Summary -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Current Month Activity</h2>
+          </div>
+          <div class="dashboard-cards" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 0;">
+            <article class="card income" style="box-shadow: none; border-radius: var(--radius-md); padding: 16px;">
+              <h3 style="font-size: 11px;">Monthly Income</h3>
+              <p id="monthlyIncome" style="font-size: 20px;">Rs: 0.00</p>
+            </article>
+            <article class="card expense" style="box-shadow: none; border-radius: var(--radius-md); padding: 16px;">
+              <h3 style="font-size: 11px;">Monthly Expenses</h3>
+              <p id="monthlyExpenses" style="font-size: 20px;">Rs: 0.00</p>
+            </article>
+            <article class="card balance" style="box-shadow: none; border-radius: var(--radius-md); padding: 16px;">
+              <h3 style="font-size: 11px;">Monthly Balance</h3>
+              <p id="monthlyBalance" style="font-size: 20px;">Rs: 0.00</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Grid Layout for Stats list vs Recents -->
+        <div class="section-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Expense Category breakdown</h2>
+            </div>
+            <div id="categoryStats">
+              <div class="empty-state"><p>No expense data available.</p></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Recent Activity</h2>
+            </div>
+            <div id="recentTransactions">
+              <div class="empty-state"><p>No transactions yet.</p></div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+</html>

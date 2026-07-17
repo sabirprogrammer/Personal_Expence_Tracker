@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - Personal Expense Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>ExpenseTracker</h2>
+            </div>
+            
+            <div class="sidebar-user">
+                <div id="sidebarAvatar"></div>
+                <div class="user-info">
+                    <span class="user-name" id="sidebarUserName">Loading...</span>
+                    <span class="user-role" id="sidebarUserRole">User</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="transactions.html" class="active">Transactions</a>
+                <a href="add-transaction.html">Add Transaction</a>
+                <a href="reports.html">Reports</a>
+                <a href="profile.html">Profile</a>
+                <a href="#" id="logoutBtn" class="logout-link" style="margin-top: auto;">Logout</a>
+            </nav>
+        </aside>
+        
+        <div class="main-layout">
+            <header class="app-header">
+                <h1>Transaction History</h1>
+            </header>
+            
+            <main class="content-area">
+                <!-- Search & Filters Control Bar -->
+                <div class="controls-bar">
+                    <div class="search-wrapper">
+                        <input type="text" id="searchInput" placeholder="Search by category or description...">
+                    </div>
+
+                    <div class="filter-wrapper">
+                        <label for="filterType">Type</label>
+                        <select id="filterType">
+                            <option value="all">All Transactions</option>
+                            <option value="Income">Income Only</option>
+                            <option value="Expense">Expense Only</option>
+                        </select>
+
+                        <label for="sortOption" style="margin-left: 12px;">Sort By</label>
+                        <select id="sortOption">
+                            <option value="date-newest">Date (Newest First)</option>
+                            <option value="date-oldest">Date (Oldest First)</option>
+                            <option value="amount-high">Amount (High to Low)</option>
+                            <option value="amount-low">Amount (Low to High)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Transactions Data Table Panel -->
+                <div class="panel" style="padding: 16px;">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ref ID</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionTableBody">
+                                <!-- Loaded dynamically via fetch requests -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

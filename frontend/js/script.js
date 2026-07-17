@@ -39,8 +39,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     return;
   }
 
-  // ── Sidebar Initialisation ──────────────────────────────────
+  // ── Theme Initialisation ──────────────────────────────────
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
 
+  // ── Sidebar Initialisation ──────────────────────────────────
   const sidebarUserName = document.getElementById('sidebarUserName');
   const sidebarUserRole = document.getElementById('sidebarUserRole');
   const sidebarAvatar   = document.getElementById('sidebarAvatar');
@@ -54,6 +59,110 @@ document.addEventListener('DOMContentLoaded', async function () {
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', e => { e.preventDefault(); logout(); });
+  }
+
+  // Sidebar Collapse Toggle
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+  const savedSidebarState = localStorage.getItem('sidebar-collapsed');
+
+  if (savedSidebarState === 'true' && sidebar) {
+    sidebar.classList.add('collapsed');
+  }
+
+  if (sidebarCollapseBtn && sidebar) {
+    sidebarCollapseBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      localStorage.setItem('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+    });
+  }
+
+  // Theme Toggle Button Event
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+      localStorage.setItem('theme', currentTheme);
+      // Reload page to refresh Chart.js canvas themes cleanly
+      window.location.reload();
+    });
+  }
+
+  // Header Menu Dropdowns
+  const profileDropdownBtn = document.getElementById('profileDropdownBtn');
+  const profileDropdown = document.getElementById('profileDropdown');
+  const notificationsBtn = document.getElementById('notificationsBtn');
+  const notificationsDropdown = document.getElementById('notificationsDropdown');
+
+  function closeAllDropdowns() {
+    if (profileDropdown) profileDropdown.classList.remove('show');
+    if (notificationsDropdown) notificationsDropdown.classList.remove('show');
+  }
+
+  if (profileDropdownBtn && profileDropdown) {
+    profileDropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willShow = !profileDropdown.classList.contains('show');
+      closeAllDropdowns();
+      if (willShow) profileDropdown.classList.add('show');
+    });
+  }
+
+  if (notificationsBtn && notificationsDropdown) {
+    notificationsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willShow = !notificationsDropdown.classList.contains('show');
+      closeAllDropdowns();
+      if (willShow) notificationsDropdown.classList.add('show');
+    });
+  }
+
+  document.addEventListener('click', () => {
+    closeAllDropdowns();
+  });
+
+  if (profileDropdown) {
+    profileDropdown.addEventListener('click', (e) => e.stopPropagation());
+  }
+  if (notificationsDropdown) {
+    notificationsDropdown.addEventListener('click', (e) => e.stopPropagation());
+  }
+
+  // Set Profile Dropdown User info
+  const dropdownUserName = document.getElementById('dropdownUserName');
+  const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+  const headerAvatar = document.getElementById('headerAvatar');
+
+  if (user) {
+    if (dropdownUserName) dropdownUserName.textContent = user.name;
+    if (dropdownUserEmail) dropdownUserEmail.textContent = user.email;
+    if (headerAvatar) {
+      renderSidebarAvatar(headerAvatar, user);
+    }
+  }
+
+  const dropdownLogoutBtn = document.getElementById('dropdownLogoutBtn');
+  if (dropdownLogoutBtn) {
+    dropdownLogoutBtn.addEventListener('click', e => { e.preventDefault(); logout(); });
+  }
+
+  // Clear Notifications Alert
+  const clearNotifications = document.getElementById('clearNotifications');
+  if (clearNotifications) {
+    clearNotifications.addEventListener('click', (e) => {
+      e.preventDefault();
+      const badge = document.querySelector('.notification-badge');
+      if (badge) badge.style.display = 'none';
+      const list = document.querySelector('.dropdown-list');
+      if (list) {
+        list.innerHTML = `
+          <li style="text-align: center; color: var(--text-muted); padding: 16px 0;">
+            No new notifications
+          </li>
+        `;
+      }
+    });
   }
 
   // ── Signup Form ─────────────────────────────────────────────
@@ -627,10 +736,16 @@ document.addEventListener('DOMContentLoaded', async function () {
           }
         });
 
+        const isLight = document.body.classList.contains('light-theme');
+        const textColor = isLight ? '#0f172a' : '#f3f4f6';
+        const labelColor = isLight ? '#475569' : '#9ca3af';
+        const gridColor = isLight ? 'rgba(15,23,42,0.06)' : 'rgba(255,255,255,0.05)';
+        const borderColor = isLight ? '#ffffff' : '#151f32';
+
         const CHART_COLORS = ['#a855f7','#3b82f6','#10b981','#f59e0b','#f43f5e','#0ea5e9','#6366f1','#14b8a6','#ec4899','#84cc16'];
         const CHART_DEFAULTS = {
-          legend: { position: 'right', labels: { color: '#f3f4f6' } },
-          scale:  { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          legend: { position: 'right', labels: { color: textColor } },
+          scale:  { ticks: { color: labelColor }, grid: { color: gridColor } }
         };
 
         // Category doughnut chart
@@ -641,7 +756,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         } else {
           new Chart(categoryChartCanvas, {
             type: 'doughnut',
-            data: { labels: catLabels, datasets: [{ data: catValues, backgroundColor: CHART_COLORS, borderWidth: 1, borderColor: 'var(--bg-surface)' }] },
+            data: { labels: catLabels, datasets: [{ data: catValues, backgroundColor: CHART_COLORS, borderWidth: 1, borderColor: borderColor }] },
             options: { responsive: true, plugins: { legend: CHART_DEFAULTS.legend } }
           });
         }
@@ -663,7 +778,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             options: {
               responsive: true,
               scales: { x: CHART_DEFAULTS.scale, y: CHART_DEFAULTS.scale },
-              plugins: { legend: { labels: { color: '#f3f4f6' } } }
+              plugins: { legend: { labels: { color: textColor } } }
             }
           });
         }

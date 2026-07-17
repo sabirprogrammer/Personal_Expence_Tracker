@@ -95,9 +95,44 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
-  // ── Login Form ──────────────────────────────────────────────
+  // ── Login Form & Recovery / Reset Handlers ─────────────────
 
   const loginForm = document.getElementById('loginForm');
+  const loginFormContainer = document.getElementById('loginFormContainer');
+  const forgotFormContainer = document.getElementById('forgotFormContainer');
+  const resetFormContainer = document.getElementById('resetFormContainer');
+
+  // Check URL for reset token
+  const resetTokenParam = getParameterByName('reset');
+  if (resetTokenParam) {
+    const resetTokenInput = document.getElementById('resetToken');
+    if (loginFormContainer && resetFormContainer && resetTokenInput) {
+      loginFormContainer.style.display = 'none';
+      resetFormContainer.style.display = 'block';
+      resetTokenInput.value = resetTokenParam;
+    }
+  }
+
+  // Toggle Forgot Form link
+  const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  if (forgotPasswordLink && forgotFormContainer && loginFormContainer) {
+    forgotPasswordLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      loginFormContainer.style.display = 'none';
+      forgotFormContainer.style.display = 'block';
+    });
+  }
+
+  // Toggle Back to Login link
+  const backToLoginLink = document.getElementById('backToLoginLink');
+  if (backToLoginLink && forgotFormContainer && loginFormContainer) {
+    backToLoginLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      forgotFormContainer.style.display = 'none';
+      loginFormContainer.style.display = 'block';
+    });
+  }
+
   if (loginForm) {
     loginForm.addEventListener('submit', async function (event) {
       event.preventDefault();
@@ -122,6 +157,59 @@ document.addEventListener('DOMContentLoaded', async function () {
         window.location.href = data.user.role === 'admin' ? getRoute('adminDashboard') : getRoute('userDashboard');
       } catch (error) {
         alert(error.message);
+      }
+    });
+  }
+
+  // Forgot Password Submit Form
+  const forgotForm = document.getElementById('forgotForm');
+  if (forgotForm) {
+    forgotForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('forgotEmail').value.trim();
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        alert(data.message);
+        forgotForm.reset();
+        forgotFormContainer.style.display = 'none';
+        loginFormContainer.style.display = 'block';
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  }
+
+  // Reset Password Submit Form
+  const resetForm = document.getElementById('resetForm');
+  if (resetForm) {
+    resetForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const token = document.getElementById('resetToken').value;
+      const password = document.getElementById('resetPasswordInput').value;
+      const confirmPassword = document.getElementById('resetConfirmPasswordInput').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, password })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to reset password');
+        alert(data.message);
+        window.location.href = 'login.html';
+      } catch (err) {
+        alert(err.message);
       }
     });
   }

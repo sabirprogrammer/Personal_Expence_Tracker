@@ -558,6 +558,19 @@ button, .btn {
    Profile & Auth Page Styling
    ============================================================ */
 
+body.auth-page {
+  background: radial-gradient(circle at 10% 20%, rgba(136, 84, 208, 0.15) 0%, transparent 40%), var(--bg-app);
+}
+
+.auth-main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 20px 60px 20px;
+  width: 100%;
+}
+
 .auth-container {
   display: flex;
   justify-content: center;

@@ -3,12 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Personal Expense Tracker</title>
+    <title>Sign Up - ExpenseTracker</title>
     <meta name="description" content="Register a new personal profile account with ExpenseTracker to start tracking your finances.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Core App Stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Navigation Header Modular Stylesheets -->
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/animations.css">
+    <link rel="stylesheet" href="../public/css/responsive.css">
 </head>
-<body class="auth-container">
-    <div class="auth-card" style="max-width: 600px; padding: 32px;">
+<body class="auth-page">
+
+    <!-- ====================================================
+         HEADER NAVIGATION
+         ==================================================== -->
+    <header class="landing-header" id="landingHeader">
+        <div class="nav-container">
+            <a href="../public/index.html" class="logo-text" aria-label="ExpenseTracker Home">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="9" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="14" y="3" width="7" height="5" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="3" y="16" width="7" height="5" rx="1.5" fill="url(#logoGrad)" />
+                    <rect x="14" y="12" width="7" height="9" rx="1.5" fill="url(#logoGrad)" />
+                    <defs>
+                        <linearGradient id="logoGrad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#a855f7" />
+                            <stop offset="1" stop-color="#6366f1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                ExpenseTracker
+            </a>
+
+            <nav aria-label="Main Navigation">
+                <ul class="nav-menu">
+                    <li><a href="../public/index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="../public/index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="../public/index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../public/index.html#reports" class="nav-link">Reports</a></li>
+                    <li><a href="../public/index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-nav-login" id="navLoginBtn">Login</a>
+                <a href="signup.html" class="btn-nav-register" id="navRegisterBtn">Register</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Mobile Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile Navigation">
+        <a href="../public/index.html#home" class="nav-link">Home</a>
+        <a href="../public/index.html#features" class="nav-link">Features</a>
+        <a href="../public/index.html#about" class="nav-link">About</a>
+        <a href="../public/index.html#reports" class="nav-link">Reports</a>
+        <a href="../public/index.html#contact" class="nav-link">Contact</a>
+        <hr style="border:0; border-top: 1px solid rgba(255,255,255,0.05); margin: 8px 0;">
+        <a href="login.html" class="btn btn-secondary btn-sm" style="width:100%;">Login</a>
+        <a href="signup.html" class="btn btn-primary btn-sm" style="width:100%;">Register</a>
+    </div>
+
+    <!-- Main Content below Header -->
+    <main class="auth-main-content">
+        <div class="auth-card" style="max-width: 600px; padding: 32px;">
         <div class="auth-header">
             <h2>Create an Account</h2>
             <p>Fill out the form below to register</p>
@@ -86,6 +157,8 @@
             <p>Already have an account? <a href="login.html">Login here</a></p>
         </div>
     </div>
+    </main>
+    <script src="../public/js/navbar.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/script.js"></script>
 </body>

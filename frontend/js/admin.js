@@ -358,20 +358,33 @@ document.addEventListener('DOMContentLoaded', async function () {
           const statusBadge  = u.status === 'active' ? 'badge-active' : 'badge-disabled';
           const roleBadge    = u.role === 'admin' ? 'badge-admin' : 'badge-user';
 
+          const isAdmin = u.role && u.role.toLowerCase() === 'admin';
+          const nameHtml = isAdmin 
+            ? `<strong>${u.name}</strong> <span class="badge badge-admin" style="margin-left: 8px;" title="Administrator accounts are protected.">Admin</span>`
+            : `<strong>${u.name}</strong>`;
+
+          const deleteButtonHtml = isAdmin 
+            ? '' 
+            : `<button class="btn btn-danger btn-sm delete-user-btn" data-id="${u._id}">Delete</button>`;
+
           tr.innerHTML = `
             <td>#${u._id.substring(u._id.length - 6).toUpperCase()}</td>
-            <td><strong>${u.name}</strong></td>
+            <td>${nameHtml}</td>
             <td>${u.email}</td>
             <td><span class="badge ${roleBadge}">${u.role}</span></td>
             <td><span class="badge ${statusBadge}">${u.status}</span></td>
             <td>${createdDate}</td>
             <td class="action-cell">
               <button class="btn btn-secondary btn-sm edit-user-btn" data-id="${u._id}">Edit</button>
-              <button class="btn btn-danger btn-sm delete-user-btn" data-id="${u._id}">Delete</button>
+              ${deleteButtonHtml}
             </td>`;
 
           tr.querySelector('.edit-user-btn').addEventListener('click', () => openEditUserModal(u));
-          tr.querySelector('.delete-user-btn').addEventListener('click', () => deleteUserAccount(u._id, u.name));
+          
+          const deleteBtn = tr.querySelector('.delete-user-btn');
+          if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => deleteUserAccount(u._id, u.name, u.role));
+          }
 
           adminUsersTableBody.appendChild(tr);
         });
@@ -432,7 +445,11 @@ document.addEventListener('DOMContentLoaded', async function () {
       });
     }
 
-    async function deleteUserAccount(id, name) {
+    async function deleteUserAccount(id, name, role) {
+      if (role && role.toLowerCase() === 'admin') {
+        alert('Administrator accounts cannot be deleted.');
+        return;
+      }
       if (!confirm(`CAUTION: Delete "${name}"? This permanently removes their account and all transactions.`)) return;
       try {
         const res  = await authFetch(`${API_BASE_URL}/admin/users/${id}`, { method: 'DELETE' });

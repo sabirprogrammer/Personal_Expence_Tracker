@@ -633,7 +633,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         if (profile.profileImage) {
           loadedImageBase64 = profile.profileImage;
-          profilePicImage.src = profile.profileImage;
+          const imageUrl = profile.profileImage.startsWith('http') || profile.profileImage.startsWith('data:')
+            ? profile.profileImage
+            : `${API_BASE_URL.replace('/api', '')}${profile.profileImage}`;
+          profilePicImage.src = imageUrl;
           profilePicImage.style.display = 'block';
           if (profilePicPlaceholder) profilePicPlaceholder.style.display = 'none';
         } else {

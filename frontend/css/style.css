@@ -3,36 +3,36 @@
 :root {
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   
-  /* Color Palette - Premium Slate & Violet theme */
-  --bg-app: #0b0f19;
-  --bg-surface: #151f32;
-  --bg-surface-hover: #1e2d4a;
-  --bg-sidebar: #0f1624;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-focus: #8854d0;
+  /* Color Palette - Premium Midnight Obsidian & Royal Violet */
+  --bg-app: #080711;
+  --bg-surface: #110f1e;
+  --bg-surface-hover: #1b172e;
+  --bg-sidebar: #06050b;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --border-focus: #a855f7;
   
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
   
-  --color-primary: #8854d0;
-  --color-primary-hover: #703eb5;
-  --color-primary-light: rgba(136, 84, 208, 0.15);
+  --color-primary: #a855f7;       /* Royal Purple / Violet Accent */
+  --color-primary-hover: #8b5cf6;
+  --color-primary-light: rgba(168, 85, 247, 0.12);
   
   /* Financial Colors */
   --color-income: #10b981;       /* Emerald */
-  --color-income-bg: rgba(16, 185, 129, 0.1);
+  --color-income-bg: rgba(16, 185, 129, 0.08);
   --color-expense: #f43f5e;      /* Rose */
-  --color-expense-bg: rgba(244, 63, 94, 0.1);
+  --color-expense-bg: rgba(244, 63, 94, 0.08);
   --color-balance: #0ea5e9;      /* Sky Blue */
-  --color-balance-bg: rgba(14, 165, 233, 0.1);
+  --color-balance-bg: rgba(14, 165, 233, 0.08);
   
   --color-admin: #f59e0b;        /* Amber */
-  --color-admin-bg: rgba(245, 158, 11, 0.1);
+  --color-admin-bg: rgba(245, 158, 11, 0.08);
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.25), 0 2px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 16px 32px -4px rgba(0, 0, 0, 0.4), 0 6px 16px -2px rgba(0, 0, 0, 0.2);
   
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -62,7 +62,7 @@ body {
 .app-container {
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 /* Sidebar Styling */
@@ -194,16 +194,6 @@ body {
   max-height: 100vh;
 }
 
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  border-bottom: 1px solid var(--border-color);
-  background-color: rgba(21, 31, 50, 0.3);
-  backdrop-filter: blur(8px);
-}
-
 .app-header h1 {
   font-size: 22px;
   font-weight: 700;
@@ -259,10 +249,10 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.card.income { background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(21, 31, 50, 0.75) 100%); }
-.card.expense { background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(21, 31, 50, 0.75) 100%); }
-.card.balance { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(21, 31, 50, 0.75) 100%); }
-.card.users { background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(21, 31, 50, 0.75) 100%); }
+.card.income { background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 15, 30, 0.85) 100%); }
+.card.expense { background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(17, 15, 30, 0.85) 100%); }
+.card.balance { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(17, 15, 30, 0.85) 100%); }
+.card.users { background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(17, 15, 30, 0.85) 100%); }
 
 .card.income:hover {
   border-color: rgba(16, 185, 129, 0.4);
@@ -1018,17 +1008,24 @@ body.auth-page {
 
 /* App Header Redesign */
 .app-header {
-  height: 72px;
+  height: auto;
+  min-height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  padding: 20px max(40px, calc((100% - 1400px) / 2 + 40px)) 16px max(40px, calc((100% - 1400px) / 2 + 40px));
   border-bottom: 1px solid var(--border-color);
-  background-color: rgba(21, 31, 50, 0.3);
+  background-color: rgba(17, 15, 30, 0.35);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 99;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .header-right {
@@ -1305,8 +1302,8 @@ body.light-theme {
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #94a3b8;
-  --color-primary-light: rgba(136, 84, 208, 0.1);
-  --border-focus: #8854d0;
+  --color-primary-light: rgba(168, 85, 247, 0.08);
+  --border-focus: #a855f7;
 }
 
 body.light-theme .app-header {
@@ -1372,3 +1369,120 @@ body.light-theme .toast {
   background-color: #ffffff;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
 }
+
+/* ============================================================
+   Responsive Dashboard Styles
+   ============================================================ */
+@media (max-width: 992px) {
+  .content-area {
+    padding: 24px;
+  }
+  .sidebar {
+    width: 88px;
+    padding: 24px 12px;
+  }
+  .sidebar .sidebar-logo h2,
+  .sidebar .user-info,
+  .sidebar .sidebar-nav a span {
+    display: none;
+  }
+  .sidebar .sidebar-logo {
+    padding-left: 0;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .sidebar .sidebar-user {
+    padding: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .sidebar .sidebar-nav a {
+    padding: 12px;
+    justify-content: center;
+    gap: 0;
+  }
+  .sidebar-collapse-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-sidebar);
+  }
+  
+  .sidebar.collapsed {
+    width: 260px;
+    transform: translateX(-100%);
+    padding: 24px;
+  }
+  
+  .sidebar.collapsed .sidebar-logo h2,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .sidebar-nav a span {
+    display: block !important;
+  }
+  .sidebar.collapsed .sidebar-logo {
+    padding-left: 8px;
+    justify-content: flex-start;
+    margin-bottom: 32px;
+  }
+  .sidebar.collapsed .sidebar-user {
+    padding: 12px;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+  .sidebar.collapsed .sidebar-nav a {
+    padding: 12px 16px;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  
+  .sidebar-collapse-toggle {
+    position: fixed;
+    top: 24px;
+    left: 16px;
+    right: auto;
+    z-index: 1001;
+    display: flex !important;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .sidebar.collapsed .sidebar-collapse-toggle svg {
+    transform: rotate(180deg);
+  }
+  .sidebar:not(.collapsed) .sidebar-collapse-toggle svg {
+    transform: rotate(0deg);
+  }
+
+  .main-layout {
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  .app-header {
+    padding-left: 60px !important;
+    padding-right: 20px !important;
+    padding-top: 24px !important;
+    padding-bottom: 16px !important;
+    height: auto !important;
+  }
+  
+  .content-area {
+    padding: 24px 20px;
+  }
+}

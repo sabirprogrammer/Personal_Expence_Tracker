@@ -80,13 +80,17 @@ async function deleteUser(req, res) {
   try {
     const userId = req.params.id;
 
-    if (userId === req.user._id.toString()) {
-      return res.status(400).json({ message: 'You cannot delete your own admin account.' });
-    }
-
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (user.role && user.role.toLowerCase() === 'admin') {
+      return res.status(403).json({ message: 'Administrator accounts cannot be deleted.' });
+    }
+
+    if (userId === req.user._id.toString()) {
+      return res.status(400).json({ message: 'You cannot delete your own admin account.' });
     }
 
     // Cascade delete: remove all transactions belonging to this user

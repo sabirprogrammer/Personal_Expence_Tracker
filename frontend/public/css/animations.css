@@ -1,6 +1,8 @@
-/* ============================================================
-   ExpenseTracker - Landing Page Animations & Keyframes
-   ============================================================ */
+/*
+Ye css file public landing pages transitions effects manage karti hai.
+Isme scroll fades, scales animation frames aur interactive sections details elements configured hain.
+Ye main dashboard register screens loading speed smoothly modern highlights visual effects deti hai.
+*/
 
 /* Floating Keyframe Animation */
 @keyframes float {

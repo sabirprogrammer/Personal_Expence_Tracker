@@ -1,3 +1,7 @@
+// Ye file authentication aur user profile logic ko check karti hai.
+// Isme registration, login, profile read/write, base64 profile pictures write to disk logic aur JWT verification setup hai.
+// Ye file frontend login/signup request payloads parse aur secure cookies return karti hai.
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');

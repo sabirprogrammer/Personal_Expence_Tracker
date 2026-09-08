@@ -1,3 +1,7 @@
+// Ye file Authentication actions API maps configure karti hai.
+// Isme register, login, password updates endpoints par brute-force rates limiter check maps set hain.
+// Ye user register dashboard login panel views ko authentication endpoints access deta hai.
+
 const express = require('express');
 const router = express.Router();
 const rateLimit = require('express-rate-limit');

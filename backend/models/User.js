@@ -1,3 +1,7 @@
+// Ye Mongoose Schema model file user profiles structure configure karti hai.
+// Isme name, secure email verification unique constraint, bcrypt passwords structure, status flags, aur system roles settings hain.
+// Ye user registration verify aur accounts maintain karne ke liye direct databases me save hoti hai.
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({

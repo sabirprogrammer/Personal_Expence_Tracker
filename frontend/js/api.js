@@ -3,6 +3,9 @@
  * Loaded before script.js and admin.js on every authenticated page.
  * Provides: API_BASE_URL, authFetch(), logout(), getInitials()
  */
+// Ye frontend common library configuration variables hold karti hai.
+// Isme API endpoint URLs definition, secure authFetch utilities, custom dropdown selects creation overrides, custom proxy select observers, toast alert functions set hain.
+// Ye user and admin scripts load hone se pehle shared utility functions access dene ke liye register hai.
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -126,3 +129,236 @@ window.alert = function (message) {
   
   showToast(message, type);
 };
+
+// ============================================================
+// Custom Select Dropdown UI Engine
+// ============================================================
+
+// Intercept programmatic select assignments to synchronize custom dropdowns
+(function() {
+  const originalValue = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+  const originalIndex = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'selectedIndex');
+
+  if (originalValue && originalIndex) {
+    Object.defineProperty(HTMLSelectElement.prototype, 'value', {
+      set: function(val) {
+        const prev = this.value;
+        originalValue.set.call(this, val);
+        if (prev !== val) {
+          this.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      },
+      get: function() {
+        return originalValue.get.call(this);
+      }
+    });
+
+    Object.defineProperty(HTMLSelectElement.prototype, 'selectedIndex', {
+      set: function(val) {
+        const prev = this.selectedIndex;
+        originalIndex.set.call(this, val);
+        if (prev !== val) {
+          this.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      },
+      get: function() {
+        return originalIndex.get.call(this);
+      }
+    });
+  }
+})();
+
+window.initializeCustomSelects = function() {
+  const selects = document.querySelectorAll('select:not(.custom-select-hidden)');
+  selects.forEach(select => {
+    // Hide original select visually
+    select.classList.add('custom-select-hidden');
+    select.style.display = 'none';
+
+    // Create custom wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-select-wrapper';
+    if (select.id) {
+      wrapper.id = 'custom-wrapper-' + select.id;
+    }
+    
+    // Copy inline width if any
+    if (select.style.width) {
+      wrapper.style.width = select.style.width;
+    }
+
+    // Insert wrapper before native select and put select inside wrapper
+    select.parentNode.insertBefore(wrapper, select);
+    wrapper.appendChild(select);
+
+    // Create trigger box
+    const trigger = document.createElement('div');
+    trigger.className = 'custom-select-trigger';
+    trigger.tabIndex = 0;
+    
+    const triggerText = document.createElement('span');
+    trigger.appendChild(triggerText);
+    
+    // Add SVG Chevron arrow
+    trigger.innerHTML += `
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    `;
+    const span = trigger.querySelector('span');
+    wrapper.appendChild(trigger);
+
+    // Create options list popup
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'custom-select-options';
+    wrapper.appendChild(optionsContainer);
+
+    let highlightedIndex = -1;
+
+    // Render option list elements
+    function renderOptions() {
+      optionsContainer.innerHTML = '';
+      const options = select.options;
+      
+      const selectedOption = select.options[select.selectedIndex];
+      span.textContent = selectedOption ? selectedOption.textContent : 'Select option';
+
+      for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        const optDiv = document.createElement('div');
+        optDiv.className = 'custom-select-option';
+        if (i === select.selectedIndex) {
+          optDiv.classList.add('selected');
+        }
+        optDiv.textContent = option.textContent;
+        optDiv.dataset.value = option.value;
+        optDiv.dataset.index = i;
+
+        optDiv.addEventListener('click', (e) => {
+          e.stopPropagation();
+          select.selectedIndex = i;
+          
+          // Trigger change listeners
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          select.dispatchEvent(new Event('input', { bubbles: true }));
+          
+          closeDropdown();
+        });
+
+        optionsContainer.appendChild(optDiv);
+      }
+    }
+
+    renderOptions();
+
+    // Set up MutationObserver to automatically update custom options when native options change
+    const observer = new MutationObserver(() => {
+      renderOptions();
+    });
+    observer.observe(select, { childList: true, characterData: true, subtree: true });
+
+    // Toggle dropdown state
+    function toggleDropdown() {
+      const isOpen = wrapper.classList.contains('open');
+      document.querySelectorAll('.custom-select-wrapper.open').forEach(other => {
+        if (other !== wrapper) other.classList.remove('open');
+      });
+      
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    }
+
+    function openDropdown() {
+      wrapper.classList.add('open');
+      highlightedIndex = select.selectedIndex;
+      updateHighlighting();
+      
+      const activeOpt = optionsContainer.children[highlightedIndex];
+      if (activeOpt) {
+        activeOpt.scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    function closeDropdown() {
+      wrapper.classList.remove('open');
+      highlightedIndex = -1;
+      updateHighlighting();
+    }
+
+    function updateHighlighting() {
+      Array.from(optionsContainer.children).forEach((opt, idx) => {
+        if (idx === highlightedIndex) {
+          opt.classList.add('highlighted');
+        } else {
+          opt.classList.remove('highlighted');
+        }
+      });
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+
+    // Handle updates when other scripts change the select programmatically
+    select.addEventListener('change', () => {
+      renderOptions();
+    });
+
+    document.addEventListener('click', () => {
+      closeDropdown();
+    });
+
+    // Keyboard support
+    trigger.addEventListener('keydown', (e) => {
+      const options = optionsContainer.children;
+      const isOpen = wrapper.classList.contains('open');
+
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        if (!isOpen) {
+          openDropdown();
+        } else {
+          if (highlightedIndex >= 0 && highlightedIndex < options.length) {
+            select.selectedIndex = highlightedIndex;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            select.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          closeDropdown();
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!isOpen) {
+          openDropdown();
+        } else {
+          highlightedIndex = (highlightedIndex + 1) % options.length;
+          updateHighlighting();
+          options[highlightedIndex].scrollIntoView({ block: 'nearest' });
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!isOpen) {
+          openDropdown();
+        } else {
+          highlightedIndex = (highlightedIndex - 1 + options.length) % options.length;
+          updateHighlighting();
+          options[highlightedIndex].scrollIntoView({ block: 'nearest' });
+        }
+      } else if (e.key === 'Escape') {
+        if (isOpen) {
+          e.preventDefault();
+          closeDropdown();
+        }
+      } else if (e.key === 'Tab') {
+        closeDropdown();
+      }
+    });
+  });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.initializeCustomSelects();
+});

@@ -1,3 +1,7 @@
+// Ye Mongoose Schema model file Category collections structure define karti hai.
+// Isme category name aur unique indexing configurations mapped hain.
+// Ye database level par unique categories validate aur save karne ke liye use hoti hai.
+
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({

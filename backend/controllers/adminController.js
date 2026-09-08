@@ -1,8 +1,13 @@
+// Ye file admin panel ke dashboard actions ko handle karti hai.
+// Isme system users retrieval, updates, status changes, analytics, aur global transaction activity processing hai.
+// Ye controller direct database models ko call karke admin metrics provide karta hai.
+
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
 const Category = require('../models/Category');
 const { formatTransaction } = require('../utils/formatters');
+const PDFDocument = require('pdfkit');
 
 // ── User Management ────────────────────────────────────────────
 
@@ -235,11 +240,141 @@ async function getAdminReports(req, res) {
   }
 }
 
+async function getAdminExportPDF(req, res) {
+  try {
+    const transactions = await Transaction.find().sort({ date: -1 }).populate('userId', 'name email');
+
+    const doc = new PDFDocument({ margin: 50 });
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename="admin_system_report.pdf"');
+    doc.pipe(res);
+
+    // Document Title & Brand Info
+    doc.fillColor('#f59e0b')
+       .fontSize(24)
+       .font('Helvetica-Bold')
+       .text('ExpenseTracker - System Report', 50, 50);
+
+    doc.fillColor('#94a3b8')
+       .fontSize(10)
+       .font('Helvetica')
+       .text('Global Administrative System Transactions Logs', 50, 75);
+
+    doc.moveDown(1.5);
+    
+    // Draw divider line
+    doc.strokeColor('#e2e8f0')
+       .lineWidth(1)
+       .moveTo(50, 95)
+       .lineTo(550, 95)
+       .stroke();
+    
+    doc.moveDown(1);
+
+    // Summary calculations
+    let totalIncome = 0;
+    let totalExpenses = 0;
+    transactions.forEach(t => {
+      if (t.type.toLowerCase() === 'income') {
+        totalIncome += t.amount;
+      } else {
+        totalExpenses += t.amount;
+      }
+    });
+    const netBalance = totalIncome - totalExpenses;
+
+    // Render Summary Block
+    doc.fillColor('#0f172a')
+       .fontSize(12)
+       .font('Helvetica-Bold')
+       .text('System Summary:', 50, 115);
+
+    doc.font('Helvetica')
+       .fontSize(10)
+       .fillColor('#10b981')
+       .text(`System Income: Rs: ${totalIncome.toFixed(2)}`, 60, 135)
+       .fillColor('#f43f5e')
+       .text(`System Expenses: Rs: ${totalExpenses.toFixed(2)}`, 240, 135)
+       .fillColor(netBalance >= 0 ? '#10b981' : '#f43f5e')
+       .text(`Net System Balance: Rs: ${netBalance.toFixed(2)}`, 420, 135);
+
+    doc.moveDown(2);
+
+    // Table Header
+    let y = 175;
+    doc.fillColor('#0f172a')
+       .font('Helvetica-Bold')
+       .fontSize(10);
+    
+    doc.text('Date', 50, y);
+    doc.text('User', 130, y);
+    doc.text('Category', 240, y);
+    doc.text('Type', 340, y);
+    doc.text('Amount', 400, y);
+    doc.text('Description', 470, y);
+
+    // Divider under header
+    doc.strokeColor('#94a3b8')
+       .lineWidth(1)
+       .moveTo(50, y + 15)
+       .lineTo(550, y + 15)
+       .stroke();
+
+    y += 25;
+    
+    // Transaction Rows
+    doc.font('Helvetica').fontSize(8.5);
+    transactions.forEach(t => {
+      if (y > 700) {
+        doc.addPage();
+        y = 50;
+        doc.fillColor('#0f172a')
+           .font('Helvetica-Bold')
+           .fontSize(10);
+        doc.text('Date', 50, y);
+        doc.text('User', 130, y);
+        doc.text('Category', 240, y);
+        doc.text('Type', 340, y);
+        doc.text('Amount', 400, y);
+        doc.text('Description', 470, y);
+        doc.strokeColor('#94a3b8').moveTo(50, y + 15).lineTo(550, y + 15).stroke();
+        y += 25;
+        doc.font('Helvetica').fontSize(8.5);
+      }
+
+      const dateStr = t.date ? new Date(t.date).toISOString().split('T')[0] : 'N/A';
+      const isIncome = t.type.toLowerCase() === 'income';
+      const userName = t.userId ? t.userId.name : 'Unknown';
+
+      doc.fillColor('#64748b').text(dateStr, 50, y);
+      doc.fillColor('#0f172a').text(userName, 130, y, { width: 100, height: 15, ellipsis: true });
+      doc.text(t.category, 240, y, { width: 90, height: 15, ellipsis: true });
+      doc.fillColor(isIncome ? '#10b981' : '#f43f5e').text(t.type, 340, y);
+      doc.fillColor('#0f172a').text(`Rs: ${t.amount.toFixed(2)}`, 400, y);
+      doc.fillColor('#64748b').text(t.description || '-', 470, y, { width: 80, height: 15, ellipsis: true });
+
+      doc.strokeColor('#f1f5f9')
+         .lineWidth(0.5)
+         .moveTo(50, y + 15)
+         .lineTo(550, y + 15)
+         .stroke();
+
+      y += 22;
+    });
+
+    doc.end();
+  } catch (err) {
+    res.status(500).json({ message: 'Error generating admin system PDF report', error: err.message });
+  }
+}
+
 module.exports = {
   getUsers,
   updateUser,
   deleteUser,
   getAdminTransactions,
   deleteAdminTransaction,
-  getAdminReports
+  getAdminReports,
+  getAdminExportPDF
 };

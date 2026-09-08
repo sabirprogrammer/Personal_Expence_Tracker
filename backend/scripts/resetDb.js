@@ -1,10 +1,6 @@
-/**
- * resetDb.js
- * Utility script: wipes the database and re-seeds it with default data.
- * Run with: npm run reset-db
- *
- * CAUTION: This permanently deletes ALL data. Do NOT run in production.
- */
+// Ye database maintenance script collections register reset validation handle karti hai.
+// Isme tables format drops, default seed indexes triggers, and environment checks setup hain.
+// Ye console utility ya package script triggers par MongoDB database fresh seed structure clean setup karti hai.
 
 if (process.env.NODE_ENV === 'production') {
   console.error('ERROR: reset-db cannot be run in production environment.');

@@ -1,8 +1,6 @@
-/**
- * emailService.js
- * Service handling email notifications using Nodemailer.
- * In development, falls back to logging emails to standard output.
- */
+// Ye file password recovery aur verification alert mails trigger send methods wrap karti hai.
+// Isme Nodemailer config triggers aur system logs development email output settings config set hain.
+// Ye forgot/reset forms request endpoints alerts ko direct verify mail links dispatch handles chalati hai.
 
 const nodemailer = require('nodemailer');
 

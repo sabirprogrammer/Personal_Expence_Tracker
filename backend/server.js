@@ -1,9 +1,14 @@
+// Ye file Node.js/Express backend server ki entry point hai.
+// Isme middlewares, routing, and database connection initialisation code setup hai.
+// Ye server port 5000 par launch hone ke liye project ka background backend chalati hai.
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const transactionRoutes = require('./routes/transactionRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -28,8 +33,8 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
 
 // Expose profile static uploads mapping

@@ -1,3 +1,7 @@
+// Ye Mongoose Schema model file transactions data validation and schema definitions manage karti hai.
+// Isme transaction amounts (bounds checks), userId fields index, date, description, aur type configuration constraints set hain.
+// Ye MongoDB databases me transactions retrieve aur store karne ka data layer implement karti hai.
+
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({

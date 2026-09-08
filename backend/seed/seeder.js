@@ -1,8 +1,6 @@
-/**
- * seeder.js
- * Database seeding logic — runs once on application startup.
- * Seeds default categories and admin account only.
- */
+// Ye file database seeding utility handle karti hai.
+// Isme admin user create actions aur dynamic default transaction categories collections load validation configuration settings set hain.
+// Ye application launch par primary collections populated state verify and seed karne ke liye deploy hoti hai.
 
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');

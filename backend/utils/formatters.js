@@ -1,7 +1,6 @@
-/**
- * formatters.js
- * Shared data-formatting utilities for controllers.
- */
+// Ye file utility helper formatting methods wrap karti hai.
+// Isme dynamic fields parsing, dates output parameters, and database objects filters format methods set hain.
+// Ye raw controllers responses structures clean formatting and responses optimization ke liye use hoti hai.
 
 /**
  * Formats a Mongoose Transaction document into a plain object

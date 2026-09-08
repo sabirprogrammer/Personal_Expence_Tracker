@@ -1,3 +1,7 @@
+// Ye file system expense categories create, update, delete aur fetch karne ka logic handle karti hai.
+// Isme categories records checks, Mongoose validation, and unique fields constraints verification hai.
+// Ye admin dashboard category management and dropdown option listings ko dynamic support deti hai.
+
 const Category = require('../models/Category');
 const Transaction = require('../models/Transaction');
 

@@ -1,3 +1,9 @@
+/*
+Ye stylesheet website ka global styling design system handle karti hai.
+Isme color tokens, obsidian custom select boxes overrides, amethyst surfaces themes settings, grids layouts, cards gradients, and responsive breakpoints queries set hain.
+Ye poore client app view ko visual interface and animations look pradan karti hai.
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
@@ -61,8 +67,10 @@ body {
 
 .app-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   width: 100%;
+  overflow: hidden;
 }
 
 /* Sidebar Styling */
@@ -75,6 +83,7 @@ body {
   padding: 24px;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  overflow-y: auto;
 }
 
 .sidebar-logo {
@@ -90,6 +99,7 @@ body {
   font-weight: 800;
   background: linear-gradient(to right, #a855f7, #6366f1);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
 }
@@ -191,7 +201,7 @@ body {
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
-  max-height: 100vh;
+  height: 100%;
 }
 
 .app-header h1 {
@@ -1019,7 +1029,7 @@ body.auth-page {
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 150;
 }
 
 .header-left {
@@ -1121,7 +1131,7 @@ body:not(.light-theme) .moon-icon {
   padding: 16px;
   display: none;
   flex-direction: column;
-  z-index: 100;
+  z-index: 160;
   width: 320px;
   backdrop-filter: blur(12px);
   animation: slideDown 0.2s ease forwards;
@@ -1371,6 +1381,126 @@ body.light-theme .toast {
 }
 
 /* ============================================================
+   Custom Select Dropdown Component
+   ============================================================ */
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  min-height: 48px;
+  outline: none;
+}
+
+.custom-select-wrapper:focus-within .custom-select-trigger {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.custom-select-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-surface-hover);
+}
+
+.custom-select-trigger .chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  stroke: var(--text-secondary);
+  fill: none;
+}
+
+.custom-select-wrapper.open .custom-select-trigger .chevron {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 90;
+  max-height: 240px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.custom-select-wrapper.open .custom-select-options {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.custom-select-option {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s, color 0.15s;
+  text-align: left;
+}
+
+.custom-select-option:hover,
+.custom-select-option.highlighted {
+  background-color: var(--color-primary-light);
+  color: var(--text-primary);
+}
+
+.custom-select-option.selected {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Light Theme overrides for custom selects */
+body.light-theme .custom-select-trigger {
+  background-color: #ffffff;
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}
+body.light-theme .custom-select-trigger:hover {
+  border-color: rgba(15, 23, 42, 0.3);
+  background-color: #f1f5f9;
+}
+body.light-theme .custom-select-options {
+  background-color: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+body.light-theme .custom-select-option {
+  color: #475569;
+}
+body.light-theme .custom-select-option:hover,
+body.light-theme .custom-select-option.highlighted {
+  background-color: rgba(168, 85, 247, 0.08);
+  color: #a855f7;
+}
+body.light-theme .custom-select-option.selected {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ============================================================
    Responsive Dashboard Styles
    ============================================================ */
 @media (max-width: 992px) {
@@ -1403,6 +1533,20 @@ body.light-theme .toast {
   }
   .sidebar-collapse-toggle {
     display: none;
+  }
+  
+  /* Responsive Header spacing at 992px */
+  .app-header {
+    padding: 20px 24px 16px 24px;
+  }
+  .header-right {
+    gap: 12px;
+  }
+  .header-search input {
+    width: 140px;
+  }
+  .header-search input:focus {
+    width: 180px;
   }
 }
 
@@ -1471,7 +1615,9 @@ body.light-theme .toast {
 
   .main-layout {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
   }
   
   .app-header {
@@ -1480,9 +1626,50 @@ body.light-theme .toast {
     padding-top: 24px !important;
     padding-bottom: 16px !important;
     height: auto !important;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .header-left {
+    flex-shrink: 0;
+  }
+  
+  .header-right {
+    flex-grow: 1;
+    justify-content: flex-end;
+    gap: 12px;
   }
   
   .content-area {
     padding: 24px 20px;
+  }
+}
+
+/* Stacking for extra small screens/mobile */
+@media (max-width: 576px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-left: 60px !important;
+    padding-top: 16px !important;
+    padding-bottom: 12px !important;
+  }
+  .header-left {
+    width: 100%;
+  }
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .header-search {
+    flex-grow: 1;
+  }
+  .header-search input {
+    width: 100% !important;
+  }
+  .header-search input:focus {
+    width: 100% !important;
   }
 }
